@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import argparse, csv, pyodbc, sys
 
 parser = argparse.ArgumentParser(description='Exports data from ODBC to CSV', prog='odbcdump')
