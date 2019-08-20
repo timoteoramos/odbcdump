@@ -7,6 +7,7 @@ parser.add_argument('--fileencoding', '-fe', help='Output file encoding (default
 parser.add_argument('--metaencoding', '-me', help='DB metadata encoding (default: utf-8)', default='utf-8')
 parser.add_argument('--output', '-o', help='Output file')
 parser.add_argument('--password', '-pwd', help='ODBC Password')
+parser.add_argument('--quotechar', '-qc', help='Quote character (default: ")', default='"')
 parser.add_argument('--textencoding', '-te', help='DB text encoding (default: utf-8)', default='utf-8')
 parser.add_argument('--userid', '-uid', help='ODBC User ID')
 parser.add_argument('command', help='SQL command')
@@ -29,7 +30,7 @@ try:
     conn.setencoding(encoding=args.textencoding)
 
     with conn.cursor() as cursor:
-        writer = csv.writer(io, quoting=csv.QUOTE_NONNUMERIC)
+        writer = csv.writer(io, quotechar=args.quotechar, quoting=csv.QUOTE_NONNUMERIC)
 
         for row in cursor.execute(args.command):
             writer.writerow(row)
